@@ -188,12 +188,8 @@ export const orderShippingMethodsQuery = gql`
       edges {
         node {
           shippingMethods {
-            edges {
-              node {
-                id
-                name
-              }
-            }
+            id
+            name
           }
         }
       }
