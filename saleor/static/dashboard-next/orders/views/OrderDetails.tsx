@@ -24,6 +24,7 @@ import {
   TypedOrderDetailsQuery,
   TypedOrderShippingMethodsQuery
 } from "../queries";
+import { OrderAddNote } from "../types/OrderAddNote";
 
 interface OrderDetailsProps {
   id: string;
@@ -73,7 +74,9 @@ export const OrderDetails: React.StatelessComponent<OrderDetailsProps> = ({
                                       data: OrderRefundMutation
                                     ) => {
                                       if (
-                                        !maybe(() => data.orderRefund.errors.length)
+                                        !maybe(
+                                          () => data.orderRefund.errors.length
+                                        )
                                       ) {
                                         pushMessage({
                                           text: i18n.t(
@@ -100,6 +103,24 @@ export const OrderDetails: React.StatelessComponent<OrderDetailsProps> = ({
                                         });
                                       }
                                     };
+                                    const handleNoteAdd = (
+                                      data: OrderAddNote
+                                    ) => {
+                                      if (
+                                        !maybe(
+                                          () => data.orderAddNote.errors.length
+                                        )
+                                      ) {
+                                        pushMessage({
+                                          text: i18n.t(
+                                            "Note succesfully added",
+                                            {
+                                              context: "notification"
+                                            }
+                                          )
+                                        });
+                                      }
+                                    };
                                     return (
                                       <OrderOperations
                                         order={id}
@@ -107,10 +128,12 @@ export const OrderDetails: React.StatelessComponent<OrderDetailsProps> = ({
                                         onFulfillmentCreate={
                                           handleFulfillmentCreate
                                         }
+                                        onNoteAdd={handleNoteAdd}
                                         onPaymentCapture={handlePaymentCapture}
                                         onPaymentRefund={handlePaymentRefund}
                                       >
                                         {({
+                                          orderAddNote,
                                           orderCreateFulfillment,
                                           orderPaymentCapture,
                                           orderPaymentRefund
@@ -160,6 +183,12 @@ export const OrderDetails: React.StatelessComponent<OrderDetailsProps> = ({
                                               )
                                             )}
                                             user={user}
+                                            onNoteAdd={variables =>
+                                              orderAddNote.mutate({
+                                                input: { ...variables },
+                                                order: id
+                                              })
+                                            }
                                             onOrderCancel={cancelOrder}
                                             onOrderFulfill={variables =>
                                               orderCreateFulfillment.mutate({

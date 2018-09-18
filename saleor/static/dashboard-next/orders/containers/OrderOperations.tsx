@@ -14,13 +14,19 @@ import {
   OrderRefundMutationVariables
 } from "../../gql-types";
 import { maybe } from "../../misc";
+import { OrderAddNote, OrderAddNoteVariables } from "../types/OrderAddNote";
 import OrderCreateFulfillmentProvider from "./OrderCreateFulfillment";
+import OrderNoteAddProvider from "./OrderNoteAdd";
 import OrderPaymentCaptureProvider from "./OrderPaymentCapture";
 import OrderPaymentRefundProvider from "./OrderPaymentRefund";
 
 interface OrderOperationsProps extends MutationProviderProps {
   order: string;
   children: MutationProviderRenderProps<{
+    orderAddNote: PartialMutationProviderOutput<
+      OrderAddNote,
+      OrderAddNoteVariables
+    >;
     orderCreateFulfillment: PartialMutationProviderOutput<
       OrderCreateFulfillmentMutation,
       OrderCreateFulfillmentMutationVariables
@@ -35,6 +41,7 @@ interface OrderOperationsProps extends MutationProviderProps {
     >;
   }>;
   onFulfillmentCreate: (data: OrderCreateFulfillmentMutation) => void;
+  onNoteAdd: (data: OrderAddNote) => void;
   onPaymentCapture: (data: OrderCaptureMutation) => void;
   onPaymentRefund: (data: OrderRefundMutation) => void;
 }
@@ -44,6 +51,7 @@ const OrderOperations: React.StatelessComponent<OrderOperationsProps> = ({
   order,
   onError,
   onFulfillmentCreate,
+  onNoteAdd,
   onPaymentCapture,
   onPaymentRefund
 }) => (
@@ -64,42 +72,55 @@ const OrderOperations: React.StatelessComponent<OrderOperationsProps> = ({
             onError={onError}
             onSuccess={onFulfillmentCreate}
           >
-            {createFulfillment =>
-              children({
-                errors: [
-                  ...maybe(
-                    () => createFulfillment.data.fulfillmentCreate.errors,
-                    [] as any
-                  ),
-                  ...maybe(
-                    () => paymentCapture.data.orderCapture.errors,
-                    [] as any
-                  ),
-                  ...maybe(() => paymentRefund.data.orderRefund.errors, [] as any)
-                ],
-                orderCreateFulfillment: {
-                  data: createFulfillment.data,
-                  loading: createFulfillment.loading,
-                  mutate: variables =>
-                    createFulfillment.mutate({
-                      variables: {
-                        ...variables,
-                        input: { ...variables.input, order }
-                      }
-                    })
-                },
-                orderPaymentCapture: {
-                  data: paymentCapture.data,
-                  loading: paymentCapture.loading,
-                  mutate: variables => paymentCapture.mutate({ variables })
-                },
-                orderPaymentRefund: {
-                  data: paymentRefund.data,
-                  loading: paymentRefund.loading,
-                  mutate: variables => paymentRefund.mutate({ variables })
+            {createFulfillment => (
+              <OrderNoteAddProvider onError={onError} onSuccess={onNoteAdd}>
+                {addNote =>
+                  children({
+                    errors: [
+                      ...maybe(
+                        () => createFulfillment.data.fulfillmentCreate.errors,
+                        [] as any
+                      ),
+                      ...maybe(() => addNote.data.orderAddNote.errors, []),
+                      ...maybe(
+                        () => paymentCapture.data.orderCapture.errors,
+                        [] as any
+                      ),
+                      ...maybe(
+                        () => paymentRefund.data.orderRefund.errors,
+                        [] as any
+                      )
+                    ],
+                    orderAddNote: {
+                      data: addNote.data,
+                      loading: addNote.loading,
+                      mutate: variables => addNote.mutate({ variables })
+                    },
+                    orderCreateFulfillment: {
+                      data: createFulfillment.data,
+                      loading: createFulfillment.loading,
+                      mutate: variables =>
+                        createFulfillment.mutate({
+                          variables: {
+                            ...variables,
+                            input: { ...variables.input, order }
+                          }
+                        })
+                    },
+                    orderPaymentCapture: {
+                      data: paymentCapture.data,
+                      loading: paymentCapture.loading,
+                      mutate: variables => paymentCapture.mutate({ variables })
+                    },
+                    orderPaymentRefund: {
+                      data: paymentRefund.data,
+                      loading: paymentRefund.loading,
+                      mutate: variables => paymentRefund.mutate({ variables })
+                    }
+                  })
                 }
-              })
-            }
+              </OrderNoteAddProvider>
+            )}
           </OrderCreateFulfillmentProvider>
         )}
       </OrderPaymentRefundProvider>
