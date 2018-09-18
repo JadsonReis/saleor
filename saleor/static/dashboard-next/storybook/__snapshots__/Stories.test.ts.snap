@@ -5011,12 +5011,6 @@ exports[`Storyshots Orders / OrderHistory default 1`] = `
             <div
               class="MuiFormControl-root-id MuiFormControl-fullWidth-id"
             >
-              <label
-                class="MuiFormLabel-root-id MuiInputLabel-root-id MuiInputLabel-formControl-id MuiInputLabel-animated-id MuiInputLabel-shrink-id"
-                data-shrink="true"
-              >
-                Note
-              </label>
               <div
                 class="MuiInput-root-id MuiInput-fullWidth-id MuiInput-formControl-id MuiInput-multiline-id MuiInput-underline-id"
               >
@@ -5041,7 +5035,7 @@ exports[`Storyshots Orders / OrderHistory default 1`] = `
                   <textarea
                     aria-invalid="false"
                     class="Textarea-textarea-id MuiInput-input-id MuiInput-inputMultiline-id"
-                    name="content"
+                    name="message"
                     placeholder="Leave your note here..."
                     rows="1"
                     type="text"
@@ -17241,12 +17235,6 @@ exports[`Storyshots Views / Orders / Order details as a draft 1`] = `
                   <div
                     class="MuiFormControl-root-id MuiFormControl-fullWidth-id"
                   >
-                    <label
-                      class="MuiFormLabel-root-id MuiInputLabel-root-id MuiInputLabel-formControl-id MuiInputLabel-animated-id MuiInputLabel-shrink-id"
-                      data-shrink="true"
-                    >
-                      Note
-                    </label>
                     <div
                       class="MuiInput-root-id MuiInput-fullWidth-id MuiInput-formControl-id MuiInput-multiline-id MuiInput-underline-id"
                     >
@@ -17271,7 +17259,7 @@ exports[`Storyshots Views / Orders / Order details as a draft 1`] = `
                         <textarea
                           aria-invalid="false"
                           class="Textarea-textarea-id MuiInput-input-id MuiInput-inputMultiline-id"
-                          name="content"
+                          name="message"
                           placeholder="Leave your note here..."
                           rows="1"
                           type="text"
@@ -18292,12 +18280,6 @@ exports[`Storyshots Views / Orders / Order details as a unpaid order 1`] = `
                   <div
                     class="MuiFormControl-root-id MuiFormControl-fullWidth-id"
                   >
-                    <label
-                      class="MuiFormLabel-root-id MuiInputLabel-root-id MuiInputLabel-formControl-id MuiInputLabel-animated-id MuiInputLabel-shrink-id"
-                      data-shrink="true"
-                    >
-                      Note
-                    </label>
                     <div
                       class="MuiInput-root-id MuiInput-fullWidth-id MuiInput-formControl-id MuiInput-multiline-id MuiInput-underline-id"
                     >
@@ -18322,7 +18304,7 @@ exports[`Storyshots Views / Orders / Order details as a unpaid order 1`] = `
                         <textarea
                           aria-invalid="false"
                           class="Textarea-textarea-id MuiInput-input-id MuiInput-inputMultiline-id"
-                          name="content"
+                          name="message"
                           placeholder="Leave your note here..."
                           rows="1"
                           type="text"
@@ -19298,12 +19280,6 @@ exports[`Storyshots Views / Orders / Order details when loaded data 1`] = `
                   <div
                     class="MuiFormControl-root-id MuiFormControl-fullWidth-id"
                   >
-                    <label
-                      class="MuiFormLabel-root-id MuiInputLabel-root-id MuiInputLabel-formControl-id MuiInputLabel-animated-id MuiInputLabel-shrink-id"
-                      data-shrink="true"
-                    >
-                      Note
-                    </label>
                     <div
                       class="MuiInput-root-id MuiInput-fullWidth-id MuiInput-formControl-id MuiInput-multiline-id MuiInput-underline-id"
                     >
@@ -19328,7 +19304,7 @@ exports[`Storyshots Views / Orders / Order details when loaded data 1`] = `
                         <textarea
                           aria-invalid="false"
                           class="Textarea-textarea-id MuiInput-input-id MuiInput-inputMultiline-id"
-                          name="content"
+                          name="message"
                           placeholder="Leave your note here..."
                           rows="1"
                           type="text"
