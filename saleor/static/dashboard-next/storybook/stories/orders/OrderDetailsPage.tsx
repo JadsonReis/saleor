@@ -26,6 +26,7 @@ const callbacks = {
   onBack: () => undefined,
   onCreate: undefined,
   onCustomerEmailClick: () => undefined,
+  onNoteAdd: undefined,
   onOrderCancel: undefined,
   onOrderFulfill: undefined,
   onOrderLineChange: () => () => () => undefined,
